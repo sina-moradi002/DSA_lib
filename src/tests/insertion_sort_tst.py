@@ -16,7 +16,7 @@ class InsertionSortTest(unittest.TestCase):
     def test_sorted_array(self):
         arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         result = insertion_sort(arr)
-        self.assertEqual(result, [1, 2, 3, 4, 5])
+        self.assertEqual(result, [1, 2, 3, 4, 5, 6, 7, 8, 9])
 
     def test_duplicate_sorted(self):
         arr = [1, 1, 2, 3, 3, 4, 4, 4, 5]
