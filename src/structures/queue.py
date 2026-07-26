@@ -43,5 +43,3 @@ class queue:
 
     def get_head(self):
         return self.head.data
-
-

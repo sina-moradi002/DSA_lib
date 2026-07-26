@@ -1,5 +1,6 @@
 from src.structures.heap.heap import Heap
 class Min_Heap(Heap):
+    # Private Methods
     def _bubble_up(self, index):
         if index < 0 or index >= len(self.heap):
             raise IndexError("Index out of range")
@@ -23,6 +24,7 @@ class Min_Heap(Heap):
             self.heap[index], self.heap[smallest] = self.heap[smallest], self.heap[index]
             self._bubble_down(smallest)
 
+    # Override Methods
     def decrease_key(self, index, value):
         if index < 0 or index >= len(self.heap):
             raise IndexError("Index out of range")
