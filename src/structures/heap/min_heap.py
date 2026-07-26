@@ -1,10 +1,7 @@
 from src.structures.heap.heap import Heap
 class Min_Heap(Heap):
-    def __init__(self):
-        super().__init__()
-
     def _bubble_up(self, index):
-        if not index > 1:
+        if index < 0 or index >= len(self.heap):
             raise IndexError("Index out of range")
         parent = self.parent(index)
         while index > 0 and self.heap[index] < self.heap[parent]:
@@ -26,3 +23,16 @@ class Min_Heap(Heap):
             self.heap[index], self.heap[smallest] = self.heap[smallest], self.heap[index]
             self._bubble_down(smallest)
 
+    def decrease_key(self, index, value):
+        if index < 0 or index >= len(self.heap):
+            raise IndexError("Index out of range")
+
+        self.heap[index] -= value
+        self._bubble_up(index)
+
+    def increase_key(self, index, value):
+        if index < 0 or index >= len(self.heap):
+            raise IndexError("Index out of range")
+
+        self.heap[index] += value
+        self._bubble_down(index)

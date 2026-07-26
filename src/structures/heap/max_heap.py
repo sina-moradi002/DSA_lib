@@ -1,10 +1,7 @@
 from src.structures.heap.heap import Heap
 class MaxHeap(Heap):
-    def __init__(self):
-        super().__init__()
-
     def _bubble_up(self, index):
-        if not index > 1:
+        if index < 0 or index >= len(self.heap):
             raise IndexError("Index out of range")
         parent = self.parent(index)
         while index > 0 and self.heap[index] > self.heap[parent]:
@@ -25,3 +22,17 @@ class MaxHeap(Heap):
         if greatest != index:
             self.heap[index], self.heap[greatest] = self.heap[greatest], self.heap[index]
             self._bubble_down(greatest)
+
+    def decrease_key(self, index, value):
+        if index < 0 or index >= len(self.heap):
+            raise IndexError("Index out of range")
+
+        self.heap[index] -= value
+        self._bubble_down(index)
+
+    def increase_key(self, index, value):
+        if index < 0 or index >= len(self.heap):
+            raise IndexError("Index out of range")
+
+        self.heap[index] += value
+        self._bubble_up(index)
