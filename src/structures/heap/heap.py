@@ -98,13 +98,33 @@ class Heap(ABC):
 
         return 2 * index + 2
 
+    # Private Methods
+    def _bubble_up(self, index):
+        if index < 0 or index >= len(self.heap):
+            raise IndexError("Index out of range")
+        parent = self.parent(index)
+        while index > 0 and self._compare(self.heap[index] , self.heap[parent]):
+            self.heap[index], self.heap[parent] = self.heap[parent], self.heap[index]
+            index = parent
+            parent = self.parent(index)
+
+    def _bubble_down(self, index):
+        target = index
+        left = self.left_child(index)
+        right = self.right_child(index)
+
+        if left < len(self.heap) and self._compare(self.heap[left], self.heap[target]):
+            target = left
+        if right < len(self.heap) and self._compare(self.heap[right], self.heap[target]):
+            target = right
+
+        if target != index:
+            self.heap[index], self.heap[target] = self.heap[target], self.heap[index]
+            self._bubble_down(target)
+
     # Abstract Methods:
     @abstractmethod
-    def _bubble_up(self, index):
-        pass
-
-    @abstractmethod
-    def _bubble_down(self, index):
+    def _compare(self, a, b):
         pass
 
     @abstractmethod
